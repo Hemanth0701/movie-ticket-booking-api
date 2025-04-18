@@ -1,0 +1,19 @@
+spring:
+  Application:
+    name: movie-ticket-booking-api
+
+  datasource:
+    url: jdbc:mariadb://localhost:3306/mtb
+    username: hemanth
+    password: hemanth0701
+
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+
