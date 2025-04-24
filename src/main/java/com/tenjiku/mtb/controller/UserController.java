@@ -3,6 +3,7 @@ package com.tenjiku.mtb.controller;
 import com.tenjiku.mtb.dto.entry_dto.LoginRequestDTO;
 import com.tenjiku.mtb.dto.entry_dto.UserDetailsDTO;
 import com.tenjiku.mtb.dto.exit_dto.UserDetailsResponseDTO;
+import com.tenjiku.mtb.dto.update_dto.UserDetailsUpdateDTO;
 import com.tenjiku.mtb.service.UserService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -12,6 +13,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
@@ -19,12 +21,13 @@ import java.net.URI;
 
 @RestController
 @AllArgsConstructor
+@Validated
 public class UserController {
 
     private final UserService userService;
 
     @PostMapping(value = "/register")
-    public ResponseEntity<?> userRegister(@RequestBody UserDetailsDTO userDetailsDTO){
+    public ResponseEntity<?> userRegister(@Valid @RequestBody UserDetailsDTO userDetailsDTO){
 
         UserDetailsResponseDTO createdUser=userService.register(userDetailsDTO);
 
@@ -45,8 +48,8 @@ public class UserController {
 
     @PutMapping(value = "/update")
     public ResponseEntity<?> updateUser(@RequestParam String id,
-                                        @RequestBody UserDetailsDTO userDetailsDTO){
-        UserDetailsResponseDTO updatedUser= userService.updateUser(id,userDetailsDTO);
+                                        @Valid @RequestBody UserDetailsUpdateDTO userDetailsUpdateDTO){
+        UserDetailsResponseDTO updatedUser= userService.updateUser(id,userDetailsUpdateDTO);
         return ResponseEntity.ok(updatedUser);
     }
 
