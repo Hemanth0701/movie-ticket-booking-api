@@ -4,24 +4,24 @@ import com.tenjiku.mtb.dto.entry_dto.TheaterOwnerDTO;
 import com.tenjiku.mtb.dto.entry_dto.UserDTO;
 import com.tenjiku.mtb.dto.entry_dto.UserDetailsDTO;
 import com.tenjiku.mtb.dto.exit_dto.UserDetailsResponseDTO;
+import com.tenjiku.mtb.dto.update_dto.TheaterOwnerUpdateDTO;
+import com.tenjiku.mtb.dto.update_dto.UserDetailsUpdateDTO;
+import com.tenjiku.mtb.dto.update_dto.UserUpdateDTO;
 import com.tenjiku.mtb.entity.TheaterOwner;
 import com.tenjiku.mtb.entity.User;
 import com.tenjiku.mtb.entity.UserDetails;
-import com.tenjiku.mtb.exception.InternalServerErrorException;
-import com.tenjiku.mtb.exception.InvalidPasswordException;
-import com.tenjiku.mtb.exception.UsernameAlreadyExistsException;
-import com.tenjiku.mtb.exception.UsernameNotFoundException;
+import com.tenjiku.mtb.exception.*;
 import com.tenjiku.mtb.mapper.UserDetailsEntryMapper;
 import com.tenjiku.mtb.mapper.UserDetailsExitMapper;
 import com.tenjiku.mtb.repositroy.UserRepo;
 import com.tenjiku.mtb.service.RoleService;
 import com.tenjiku.mtb.service.UserService;
-import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import java.time.Instant;
 import java.util.Optional;
 
 @Service
@@ -76,16 +76,16 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
-    public UserDetailsResponseDTO updateUser(String id, @NotNull UserDetailsDTO updatedUserDTO) {
+    public UserDetailsResponseDTO updateUser(String id,  UserDetailsUpdateDTO updatedUserDTO) {
 
         UserDetails existingUser = userRepo.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("User not found"));
+                .orElseThrow(() -> new UserNotFoundException("User not found"));
 
-        if (updatedUserDTO instanceof TheaterOwnerDTO) {
-            TheaterOwner owner = userDetailsEntryMapper.toTheaterOwner((TheaterOwnerDTO) updatedUserDTO);
+        if (updatedUserDTO instanceof TheaterOwnerUpdateDTO) {
+            TheaterOwner owner = userDetailsEntryMapper.toTheaterOwner((TheaterOwnerUpdateDTO)  updatedUserDTO);
             return userDetailsExitMapper.toTheaterOwnerDTO((TheaterOwner) userRepo.save(mergeUserDetails(existingUser,owner)));
-        } else if (updatedUserDTO instanceof UserDTO) {
-            User user = userDetailsEntryMapper.toUser((UserDTO) updatedUserDTO);
+        } else if (updatedUserDTO instanceof UserUpdateDTO) {
+            User user = userDetailsEntryMapper.toUser((UserUpdateDTO)  updatedUserDTO);
             return userDetailsExitMapper.toUserDTO((User) userRepo.save(mergeUserDetails(existingUser,user)));
         } else
             throw new InternalServerErrorException(" Server Went Down ");
@@ -93,9 +93,7 @@ public class UserServiceImp implements UserService {
 
     public UserDetails mergeUserDetails(UserDetails existingUser, @NotNull UserDetails updatedUser){
         // Update fields — only if they're provided (null-safe)
-        if (updatedUser.getUsername() != null) existingUser.setUsername(updatedUser.getUsername());
         if (updatedUser.getEmail() != null) existingUser.setEmail(updatedUser.getEmail());
-        if (updatedUser.getPassword() != null) existingUser.setPassword(updatedUser.getPassword());
         if (updatedUser.getPhoneNumber() != null) existingUser.setPhoneNumber(updatedUser.getPhoneNumber());
         if (updatedUser.getDob() != null) existingUser.setDob(updatedUser.getDob());
         return existingUser;
@@ -103,10 +101,17 @@ public class UserServiceImp implements UserService {
 
     @Override
     public String deleteUser(String id) {
-      Optional<UserDetails> userDetailsOpt=  userRepo.findById(id);
-        UserDetails userDetails = userDetailsOpt.get();
-        //userRepo.deleteById(id);
-        return " Deleted Successfully ";
+        UserDetails user = userRepo.findById(id)
+                .orElseThrow(() ->  new UserNotFoundException("User not found with ID: " + id));
+        if (user.isDeleted()) {
+            throw new UserAlreadyDeletedException("User is already deleted.");
+
+        }
+        user.setDeleted(true);
+        user.setDeletedAt(Instant.now());
+        userRepo.save(user);
+
+        return "Deleted successfully";
     }
 
     @Override

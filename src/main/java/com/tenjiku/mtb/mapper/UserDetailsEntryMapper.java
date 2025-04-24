@@ -2,6 +2,8 @@ package com.tenjiku.mtb.mapper;
 
 import com.tenjiku.mtb.dto.entry_dto.TheaterOwnerDTO;
 import com.tenjiku.mtb.dto.entry_dto.UserDTO;
+import com.tenjiku.mtb.dto.update_dto.TheaterOwnerUpdateDTO;
+import com.tenjiku.mtb.dto.update_dto.UserUpdateDTO;
 import com.tenjiku.mtb.entity.TheaterOwner;
 import com.tenjiku.mtb.entity.User;
 import com.tenjiku.mtb.entity.enums.Role;
@@ -34,6 +36,35 @@ public class UserDetailsEntryMapper {
         owner.setUsername(dto.getUsername());
         owner.setEmail(dto.getEmail());
         owner.setPassword(dto.getPassword());
+        owner.setPhoneNumber(dto.getPhoneNumber());
+        owner.setDob(dto.getDob());
+        owner.setRole(Role.THEATER_OWENER);
+
+        return owner;
+    }
+    public User toUser(UserUpdateDTO dto) {
+        if ( dto == null ) {
+            return null;
+        }
+
+        User user = new User();
+
+        user.setEmail(dto.getEmail());
+        user.setPhoneNumber(dto.getPhoneNumber());
+        user.setDob(dto.getDob());
+        user.setRole(Role.USER);
+
+        return user;
+    }
+
+    public TheaterOwner toTheaterOwner(TheaterOwnerUpdateDTO dto) {
+        if ( dto == null ) {
+            return null;
+        }
+
+        TheaterOwner owner = new TheaterOwner();
+
+        owner.setEmail(dto.getEmail());
         owner.setPhoneNumber(dto.getPhoneNumber());
         owner.setDob(dto.getDob());
         owner.setRole(Role.THEATER_OWENER);
