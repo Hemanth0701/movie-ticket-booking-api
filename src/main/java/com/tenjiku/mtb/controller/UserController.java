@@ -1,9 +1,9 @@
 package com.tenjiku.mtb.controller;
 
-import com.tenjiku.mtb.dto.entry_dto.LoginRequestDTO;
-import com.tenjiku.mtb.dto.entry_dto.UserDetailsDTO;
-import com.tenjiku.mtb.dto.exit_dto.UserDetailsResponseDTO;
-import com.tenjiku.mtb.dto.update_dto.UserDetailsUpdateDTO;
+import com.tenjiku.mtb.dto.entry_dto.user_registeration.LoginRequestDTO;
+import com.tenjiku.mtb.dto.entry_dto.user_registeration.UserDetailsDTO;
+import com.tenjiku.mtb.dto.exit_dto.user_registeration.UserDetailsResponseDTO;
+import com.tenjiku.mtb.dto.update_dto.user_registeration.UserDetailsUpdateDTO;
 import com.tenjiku.mtb.service.UserService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;

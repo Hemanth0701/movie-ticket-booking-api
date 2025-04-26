@@ -5,7 +5,8 @@ import lombok.*;
 
 @EqualsAndHashCode(callSuper = true)
 @Entity
-
+@Setter
+@Getter
 public class User extends UserDetails{
 
 }

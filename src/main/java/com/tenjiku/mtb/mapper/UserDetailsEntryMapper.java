@@ -1,9 +1,9 @@
 package com.tenjiku.mtb.mapper;
 
-import com.tenjiku.mtb.dto.entry_dto.TheaterOwnerDTO;
-import com.tenjiku.mtb.dto.entry_dto.UserDTO;
-import com.tenjiku.mtb.dto.update_dto.TheaterOwnerUpdateDTO;
-import com.tenjiku.mtb.dto.update_dto.UserUpdateDTO;
+import com.tenjiku.mtb.dto.entry_dto.user_registeration.TheaterOwnerDTO;
+import com.tenjiku.mtb.dto.entry_dto.user_registeration.UserDTO;
+import com.tenjiku.mtb.dto.update_dto.user_registeration.TheaterOwnerUpdateDTO;
+import com.tenjiku.mtb.dto.update_dto.user_registeration.UserUpdateDTO;
 import com.tenjiku.mtb.entity.TheaterOwner;
 import com.tenjiku.mtb.entity.User;
 import com.tenjiku.mtb.entity.enums.Role;

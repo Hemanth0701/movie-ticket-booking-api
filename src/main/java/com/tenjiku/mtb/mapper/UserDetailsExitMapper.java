@@ -1,8 +1,8 @@
 package com.tenjiku.mtb.mapper;
 
-import com.tenjiku.mtb.dto.exit_dto.TheaterOwnerResponseDTO;
-import com.tenjiku.mtb.dto.exit_dto.UserDetailsResponseDTO;
-import com.tenjiku.mtb.dto.exit_dto.UserResponseDTO;
+import com.tenjiku.mtb.dto.exit_dto.user_registeration.TheaterOwnerResponseDTO;
+import com.tenjiku.mtb.dto.exit_dto.user_registeration.UserDetailsResponseDTO;
+import com.tenjiku.mtb.dto.exit_dto.user_registeration.UserResponseDTO;
 import com.tenjiku.mtb.entity.TheaterOwner;
 import com.tenjiku.mtb.entity.User;
 import org.springframework.stereotype.Component;

@@ -1,4 +1,4 @@
-package com.tenjiku.mtb.dto.update_dto;
+package com.tenjiku.mtb.dto.update_dto.user_registeration;
 
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
@@ -15,20 +15,15 @@ import java.time.LocalDate;
 })
 public class UserDetailsUpdateDTO {
 
-
-    @NotBlank(message = "Email is required")
     @Email(message = "Invalid email format")
     private String email;
 
-
-    @NotBlank(message = "Phone number is required")
     @Pattern(
             regexp = "^\\+?[0-9]{10,15}$",
             message = "Phone number must be valid (10–15 digits, optional +)"
     )
     private String phoneNumber;
 
-    @NotNull(message = "Date of birth is required")
     @Past(message = "Date of birth must be in the past")
     private LocalDate dob;
 
