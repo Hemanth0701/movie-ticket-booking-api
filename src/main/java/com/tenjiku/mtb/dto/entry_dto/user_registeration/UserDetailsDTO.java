@@ -1,4 +1,4 @@
-package com.tenjiku.mtb.dto.entry_dto;
+package com.tenjiku.mtb.dto.entry_dto.user_registeration;
 
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;

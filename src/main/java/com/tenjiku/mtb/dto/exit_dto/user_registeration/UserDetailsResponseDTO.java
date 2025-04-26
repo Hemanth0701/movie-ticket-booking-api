@@ -1,8 +1,8 @@
-package com.tenjiku.mtb.dto.exit_dto;
+package com.tenjiku.mtb.dto.exit_dto.user_registeration;
 
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import com.tenjiku.mtb.dto.entry_dto.UserDTO;
+import com.tenjiku.mtb.dto.entry_dto.user_registeration.UserDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

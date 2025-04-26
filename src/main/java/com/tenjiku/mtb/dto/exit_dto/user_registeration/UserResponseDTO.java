@@ -1,4 +1,4 @@
-package com.tenjiku.mtb.dto.exit_dto;
+package com.tenjiku.mtb.dto.exit_dto.user_registeration;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;

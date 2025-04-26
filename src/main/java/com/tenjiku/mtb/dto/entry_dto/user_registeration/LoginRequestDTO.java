@@ -1,4 +1,4 @@
-package com.tenjiku.mtb.dto.entry_dto;
+package com.tenjiku.mtb.dto.entry_dto.user_registeration;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
