@@ -25,17 +25,16 @@ public class TheaterServiceImp implements TheaterService {
 
     @Override
     public TheaterResponceDTO register(String ownerId, TheaterDTO theaterDTO) {
-        System.out.println("inbound Service :"+theaterDTO);
         // Step 1: Fetch the TheaterOwner or throw if not found
         TheaterOwner theaterOwner = (TheaterOwner) userRepo.findById(ownerId)
                 .orElseThrow(() -> new UserNotFoundException("User not found with ID: " + ownerId));
-        System.out.println("theaterOwner without theater "+theaterOwner);
+
         // Step 2: Convert DTO to Entity and set ownership metadata
         Theater theater = theaterMapper.toEntity(theaterDTO);
-        System.out.println("Convert DTO to Entity"+theater);
+
         theater.setCreatedBy(theaterOwner.getEmail());
         theater.setTheaterOwner(theaterOwner);
-        System.out.println("theater Entity owner"+theater);
+
         // Step 3: Save theater entity
         Theater savedTheater = theaterRepo.save(theater);
 
@@ -45,7 +44,7 @@ public class TheaterServiceImp implements TheaterService {
         }
         theaterOwner.getTheaters().add(savedTheater);
         userRepo.save(theaterOwner);
-        System.out.println("theaterOwner with theater "+theaterOwner);
+
         // Step 5: Return the response DTO
         return theaterMapper.toDTO(savedTheater);
     }
