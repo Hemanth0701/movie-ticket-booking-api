@@ -8,15 +8,17 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class TheaterEntityMapper {
+
     public Theater toEntity(TheaterDTO dto) {
         if ( dto == null ) {
             return null;
         }
-          Theater theater = new Theater();
-       theater.setName(dto.getName());
-       theater.setCity(dto.getCity());
-       theater.setLandmark(dto.getLandmark());
-       theater.setAddress(dto.getAddress());
+
+        Theater theater = new Theater();
+        theater.setName(dto.getName());
+        theater.setCity(dto.getCity());
+        theater.setLandmark(dto.getLandmark());
+        theater.setAddress(dto.getAddress());
         return theater;
     }
 

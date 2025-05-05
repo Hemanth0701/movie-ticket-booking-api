@@ -64,6 +64,31 @@ public class GlobalExceptionHandler {
         return buildErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR, "Internal server error", ex.getMessage(), request);
     }
 
+    @ExceptionHandler(UserNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleUserNotFound(UserNotFoundException ex, WebRequest request) {
+        return buildErrorResponse(HttpStatus.NOT_FOUND, "User not found", ex.getMessage(), request);
+    }
+
+    @ExceptionHandler(UserAlreadyDeletedException.class)
+    public ResponseEntity<ErrorResponse> handleUserAlreadyDeleted(UserAlreadyDeletedException ex, WebRequest request) {
+        return buildErrorResponse(HttpStatus.BAD_REQUEST, "User already deleted", ex.getMessage(), request);
+    }
+
+    @ExceptionHandler(TheaterNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleTheaterNotFound(TheaterNotFoundException ex, WebRequest request) {
+        return buildErrorResponse(HttpStatus.NOT_FOUND, "Theater not found", ex.getMessage(), request);
+    }
+
+    @ExceptionHandler(ScreenNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleScreenNotFound(ScreenNotFoundException ex, WebRequest request) {
+        return buildErrorResponse(HttpStatus.NOT_FOUND, "Screen not found", ex.getMessage(), request);
+    }
+
+    @ExceptionHandler(NoOfRowsExceedCapacityException.class)
+    public ResponseEntity<ErrorResponse> handleRowExceedsCapacity(NoOfRowsExceedCapacityException ex, WebRequest request) {
+        return buildErrorResponse(HttpStatus.BAD_REQUEST, "Number of rows exceeds screen capacity", ex.getMessage(), request);
+    }
+
     // ────── Catch-All Handler ────── //
 
     @ExceptionHandler(RuntimeException.class)
