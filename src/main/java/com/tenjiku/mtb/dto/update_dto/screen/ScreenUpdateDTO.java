@@ -1,13 +1,7 @@
 package com.tenjiku.mtb.dto.update_dto.screen;
 
-import com.tenjiku.mtb.entity.Seats;
-import com.tenjiku.mtb.entity.Theater;
 import com.tenjiku.mtb.entity.enums.ScreenType;
 import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotNull;
-
-import java.time.LocalDateTime;
-import java.util.List;
 
 public class ScreenUpdateDTO {
 

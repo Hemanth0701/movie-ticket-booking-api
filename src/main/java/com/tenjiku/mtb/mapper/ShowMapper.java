@@ -1,6 +1,5 @@
 package com.tenjiku.mtb.mapper;
 
-import com.tenjiku.mtb.dto.exit_dto.screen.ScreenResponseDTO;
 import com.tenjiku.mtb.dto.exit_dto.screen.ShowResponseDTO;
 import com.tenjiku.mtb.entity.Show;
 import org.springframework.stereotype.Component;
