@@ -8,6 +8,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.data.annotation.LastModifiedDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -35,6 +36,10 @@ public class Screen {
     @OrderBy(value = "name")
     @JsonIgnore
     private List<Seats> seats;
+
+    @OneToMany(mappedBy = "screen", fetch = FetchType.EAGER)
+    @JsonIgnore
+    private Set<Show> shows;
 
     @CreationTimestamp
     private LocalDateTime createdAt;

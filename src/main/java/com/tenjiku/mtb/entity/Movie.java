@@ -8,6 +8,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.time.Duration;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -41,9 +42,9 @@ public class Movie {
     @Column(name = "genre")
     private Genre genre;
 
-//    @OneToMany(mappedBy = "movie", fetch = FetchType.LAZY)
-//    private List<Show> shows;
-//
+    @OneToMany(mappedBy = "movie", fetch = FetchType.LAZY)
+    private List<Show> shows;
+
 //    @OneToMany(mappedBy = "movie", fetch = FetchType.EAGER)
 //    private List<Feedback> feedbacks;
 

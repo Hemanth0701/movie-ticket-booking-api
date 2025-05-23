@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public interface ScreenService {
+
     ScreenResponseDTO createScreen(String theaterId, ScreenDTO screenDTO);
 
     ScreenResponseDTO findScreenById(String theaterId, String screenId);
